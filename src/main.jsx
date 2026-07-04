@@ -143,6 +143,9 @@ function VideoCanvas({ cueText, cueImage, cueMode, onPlay, showEntry, onBack }) 
 
   useEffect(() => {
     setEntryReady(false);
+    if (!showEntry) return undefined;
+    const timer = window.setTimeout(() => setEntryReady(true), 3200);
+    return () => window.clearTimeout(timer);
   }, [showEntry]);
 
   function handleVideoTime(event) {
