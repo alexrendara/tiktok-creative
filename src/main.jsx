@@ -18,11 +18,13 @@ import {
 } from "lucide-react";
 import "./styles.css";
 
+const asset = (path) => `${import.meta.env.BASE_URL}${path}`;
+
 const friends = [
-  { id: "moran", name: "@漠然MoRaN", short: "@漠然MoR...", avatar: "/assets/avatar-moran.png" },
-  { id: "baba", name: "@阿巴阿巴", short: "@阿巴阿巴", avatar: "/assets/avatar-baba.png" },
-  { id: "lala", name: "@啦啦", short: "@啦啦", avatar: "/assets/avatar-lala.png" },
-  { id: "xiaobo", name: "@小波", short: "@小波", avatar: "/assets/avatar-xiaobo.png" }
+  { id: "moran", name: "@漠然MoRaN", short: "@漠然MoR...", avatar: asset("assets/avatar-moran.png") },
+  { id: "baba", name: "@阿巴阿巴", short: "@阿巴阿巴", avatar: asset("assets/avatar-baba.png") },
+  { id: "lala", name: "@啦啦", short: "@啦啦", avatar: asset("assets/avatar-lala.png") },
+  { id: "xiaobo", name: "@小波", short: "@小波", avatar: asset("assets/avatar-xiaobo.png") }
 ];
 
 const suggestions = [
@@ -153,7 +155,7 @@ function VideoCanvas({ cueText, cueImage, cueMode, onPlay, showEntry, onBack }) 
     <section className="video-screen">
       <video
         className="real-video"
-        src="/assets/entry-video.mp4"
+        src={asset("assets/entry-video.mp4")}
         autoPlay
         muted
         loop
@@ -183,7 +185,7 @@ function VideoCanvas({ cueText, cueImage, cueMode, onPlay, showEntry, onBack }) 
       )}
 
       <aside className="side-actions">
-        <Avatar src="/assets/avatar-xiaobo.png" className="profile-plus" />
+        <Avatar src={asset("assets/avatar-xiaobo.png")} className="profile-plus" />
         <ActionIcon icon={<Heart fill="white" />} label="17.6万" />
         <ActionIcon icon={<MessageCircle fill="white" />} label="7.9万" />
         <ActionIcon icon={<Star fill="white" />} label="7356" />
@@ -192,7 +194,7 @@ function VideoCanvas({ cueText, cueImage, cueMode, onPlay, showEntry, onBack }) 
 
       {showEntry && entryReady && (
         <button type="button" className="cue-entry" onClick={onPlay}>
-          <img className="cue-entry-art" src="/assets/cue-entry-icon.png" alt="" />
+          <img className="cue-entry-art" src={asset("assets/cue-entry-icon.png")} alt="" />
           <strong>找朋友来</strong>
           <span>玩一下!</span>
         </button>
@@ -246,7 +248,7 @@ function PlaySheet({
   return (
     <section className={`play-sheet ${isEntering ? "entering" : ""} ${playMode === "image" ? "image-mode" : ""}`}>
       <div className="sheet-title">
-        <img className="sheet-cue-icon" src="/assets/cue-small-icon.png" alt="" />
+        <img className="sheet-cue-icon" src={asset("assets/cue-small-icon.png")} alt="" />
         <div>
           <h1>你想怎么玩?</h1>
         </div>
@@ -258,7 +260,7 @@ function PlaySheet({
           className={`play-option ${playMode === "text" ? "active" : ""}`}
           onClick={() => onModeChange("text")}
         >
-          <img src="/assets/edit-icon.png" alt="" />
+          <img src={asset("assets/edit-icon.png")} alt="" />
           <span>改一句</span>
         </button>
         <button
@@ -266,7 +268,7 @@ function PlaySheet({
           className={`play-option ${playMode === "image" ? "active" : ""}`}
           onClick={() => onModeChange("image")}
         >
-          <img src="/assets/image-icon.png" alt="" />
+          <img src={asset("assets/image-icon.png")} alt="" />
           <span>配图片</span>
         </button>
       </div>
@@ -297,7 +299,7 @@ function PlaySheet({
               <img src={selectedImage} alt="" />
             ) : (
               <>
-                <img src="/assets/image-icon.png" alt="" />
+                <img src={asset("assets/image-icon.png")} alt="" />
                 <span>调用相册上传</span>
               </>
             )}
@@ -369,7 +371,7 @@ function DmScreen({ finalText, playMode, selectedImage, selectedFriend, onBack, 
 
         <div className="message-row">
           <MessageVideoCard image={isImageCue ? selectedImage : null} text={finalText} />
-          <Avatar src="/assets/avatar-sender.png" small className="sender-avatar" />
+          <Avatar src={asset("assets/avatar-sender.png")} small className="sender-avatar" />
         </div>
 
         {showReply && (
@@ -380,7 +382,7 @@ function DmScreen({ finalText, playMode, selectedImage, selectedFriend, onBack, 
               <div>
                 <MessageVideoCard className="incoming-video" image={isImageCue ? selectedImage : null} text={replyText} />
                 <button type="button" className="reply-cue" onClick={onContinueEdit}>
-                  <img className="reply-cue-icon" src="/assets/cue-small-icon.png" alt="" />
+                  <img className="reply-cue-icon" src={asset("assets/cue-small-icon.png")} alt="" />
                   <strong>我也玩一下!</strong>
                 </button>
               </div>
@@ -411,7 +413,7 @@ function DmScreen({ finalText, playMode, selectedImage, selectedFriend, onBack, 
 function MessageVideoCard({ image, text, className = "" }) {
   return (
     <div className={`message-video ${className}`}>
-      <video className="message-video-cover" src="/assets/entry-video.mp4" muted playsInline preload="metadata" />
+      <video className="message-video-cover" src={asset("assets/entry-video.mp4")} muted playsInline preload="metadata" />
       {image ? (
         <div className="message-image-preview">
           <img src={image} alt="" />
